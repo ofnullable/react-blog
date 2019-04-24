@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Menu from './Menu';
-import MobileMenu from './MobileMenu';
 
 const Main = ({ contents }) => {
     const [active, setActive] = useState('About');
@@ -18,18 +17,17 @@ const Main = ({ contents }) => {
         setActive(targetId);
     };
 
-    const renderContent = (active) => {
-        return contents[active]();
-    };
-
     const renderMenu = type => {
-        console.log(type);
         return Object.keys(contents).map((c, i) => {
             return (
                 <Menu key={`${i}번째 ${type}`} type={type} title={c} active={active === c} />
             )
         });
-    }
+    };
+
+    const renderContent = (active) => {
+        return contents[active]();
+    };
 
     return (
         <>

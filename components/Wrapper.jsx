@@ -6,9 +6,9 @@ import Blog from './Blog';
 import Portfolio from './Portfolio';
 import Guestbook from './Guestbook';
 
-const Wrapper = () => {
-    const contents = {About, Blog, Portfolio, Guestbook};
+const contents = {About, Blog, Portfolio, Guestbook};
 
+const Wrapper = () => {
     return (
         <>
             <Header title={"Blog - Hello World!"} />

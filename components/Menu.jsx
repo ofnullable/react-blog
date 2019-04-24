@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-const Menu = ({ active, title }) => {
+const Menu = memo(({ active, title }) => {
     return (
         <div>
             <a className={active ? "nav-item active" : "nav-item"} id={title}>
@@ -8,6 +8,6 @@ const Menu = ({ active, title }) => {
             </a>
         </div>
     )
-}
+})
 
 export default Menu;
