@@ -190,6 +190,9 @@ textarea {
   opacity: 1;
   z-index: 1003;
 }
+#category-list.active > ul > li.active {
+  color: #2CB5E8;
+}
 #category-list.active > ul > li:hover {
   cursor: pointer;
   color: #2CB5E8;
@@ -226,7 +229,10 @@ textarea {
   margin: 5rem auto 0;
 }
 .post-list li {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+.post-list li:last-child {
+  margin-bottom: 1rem;
 }
 .post-item {
   text-align: left;

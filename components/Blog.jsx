@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import BlogCategory from './BlogCategory';
 import Post from './Post';
 
@@ -62,16 +62,52 @@ const posts = [
 ];
 
 const Blog = () => {
+    const [category, setCategory] = useState(categories[0].name);
+    const onRef = useRef('');
+
+    const toggleActive = () => {
+        const classList = onRef.current.classList;
+        if (classList.contains('active')) {
+            classList.remove('active');
+        } else {
+            classList.add('active');
+        }
+    }
+
+    const onCategoryClick = (e) =>  {
+        const activeCategory = e.currentTarget.dataset.id;
+        if ( category !== activeCategory ) {
+            toggleActive();
+            setCategory(activeCategory);
+        }
+    }
+
+    const listingPosts = () => {
+        return posts.filter( p => {
+            if (category !== 'All category') return p.category === category;
+            else return true;
+        })
+        .map( (p, i) => <Post key={`${p.title + i}`} post={p} /> );
+    }
+
     return (
         <>
             <div className="container">
-                <BlogCategory categories={categories} />
+                <div id="post-category" onClick={toggleActive}>
+                    {category}
+                </div>
+                <div id="category-list" ref={onRef}>
+                    <ul>
+                    {
+                        categories.map( c => {
+                            return <BlogCategory key={c.name} category={c} isActive={c.name === category} clickEvent={onCategoryClick} />;
+                        })
+                    }
+                    </ul>
+                </div>
+                <div id="background" onClick={toggleActive} />
                 <ul className="post-list">
-                {
-                    posts.map( (p, i) => {
-                        return (<Post key={`${p.title + i}`} post={p}/>)
-                    })
-                }
+                { listingPosts() }
                 </ul>
                 <nav id="load-more">Load more <span /></nav>
             </div>

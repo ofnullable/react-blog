@@ -1,45 +1,13 @@
-import React, { useState } from 'react';
+import React, { memo } from 'react';
 
-const BlogCategory = ({ categories }) => {
-    const [category, setCategory] = useState('All category');
-
-    const toggleActive = () => {
-        const classList = document.querySelector('#category-list').classList;
-        if (classList.contains('active')) {
-            classList.remove('active');
-        } else {
-            classList.add('active');
-        }
-    }
-
-    const onCategoryClick = (e) => {
-        toggleActive();
-        setCategory(e.target.id);
-    }
-
+const BlogCategory = memo(({ category, isActive, clickEvent }) => {
     return (
         <>
-            <div id="post-category" onClick={toggleActive}>
-                {category}
-            </div>
-            <div id="category-list">
-                <ul>
-                {
-                    categories.map( c => {
-                        return (
-                            <li key={c.name}>
-                                <a id={c.name} onClick={onCategoryClick}>
-                                    {c.name} <span>{`(${c.count})`}</span>
-                                </a>
-                            </li>
-                        );
-                    })
-                }
-                </ul>
-            </div>
-            <div id="background" onClick={toggleActive} />
+            <li className={isActive ? 'active' : null} data-id={category.name} onClickCapture={clickEvent}>
+                <a>{category.name} <span>{`(${category.count})`}</span></a>
+            </li>
         </>
     );
-}
+});
 
 export default BlogCategory;

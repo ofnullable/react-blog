@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
 import Menu from './Menu';
+import About from './About';
+import Blog from './Blog';
+import Portfolio from './Portfolio';
+import Guestbook from './Guestbook';
 
-const Main = ({ contents }) => {
+const contents = { 
+    About: <About />, 
+    Blog: <Blog />, 
+    Portfolio : <Portfolio />, 
+    Guestbook: <Guestbook />,
+};
+
+const Main = () => {
     const [active, setActive] = useState('About');
     
     const onMenuClick = (e) => {
         const targetId = e.target.id;
+        const classList = window.wrapper.classList;
         if (targetId === 'content-nav') {
             return;
         }
         if (targetId === 'Portfolio') {
-            window.wrapper.classList.add('extended');
+            classList.add('extended');
         } else {
-            window.wrapper.classList.remove('extended');
+            classList.remove('extended');
         }
         setActive(targetId);
     };
@@ -25,10 +37,6 @@ const Main = ({ contents }) => {
         });
     };
 
-    const renderContent = (active) => {
-        return contents[active]();
-    };
-
     return (
         <>
             <div className="main">
@@ -36,7 +44,7 @@ const Main = ({ contents }) => {
                     { renderMenu('Menu') }
                 </nav>
                 <div id={active} className="content active">
-                    { renderContent(active) }
+                    { contents[active] }
                 </div>
             </div>
             <nav id="bottom-menu" onClick={onMenuClick}>
