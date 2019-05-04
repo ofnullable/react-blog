@@ -194,7 +194,6 @@ textarea {
   color: #2CB5E8;
 }
 #category-list.active > ul > li:hover {
-  cursor: pointer;
   color: #2CB5E8;
 }
 #category-list.active + #background {
@@ -215,6 +214,7 @@ textarea {
   margin: 0;
 }
 #category-list ul li {
+  cursor: pointer;
   position: relative;
   font-size: 1.1rem;
   padding: 12px 10px;
